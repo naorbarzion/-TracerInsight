@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>באנדל קבלנים - Tracer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .whatsapp-message {
+            border-radius: 12px;
+            max-width: 100%;
+            position: relative;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background-color: #dcf8c6;
+            border-radius: 7.5px;
+            box-shadow: 0 1px 0.5px rgba(0,0,0,0.13);
+        }
+
+        .dark .whatsapp-message {
+            background-color: #025C4C;
+        }
+
+        .whatsapp-group {
+            background-color: #E8F1F3;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #C4E0E5;
+        }
+
+        .dark .whatsapp-group {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-all">
+    <!-- [Previous Sidebar and Navigation Code remains the same] -->
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header Section -->
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg mb-8">
+                <h1 class="text-4xl font-bold mb-6">באנדל קבלנים</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-300">
+                    חבילת פתרונות מקיפה המותאמת במיוחד לניהול צי רכב בענף הבנייה והתשתיות
+                </p>
+            </div>
+
+            <!-- ניהול עובדים וזמנים -->
+            <section class="mb-12">
+                <div class="bg-gradient-to-r from-[#00B8D4]/10 to-transparent p-4 rounded-lg mb-4">
+                    <h2 class="text-2xl font-bold text-[#00B8D4]">
+                        <i class="fas fa-users-cog mr-2"></i>
+                        ניהול עובדים וזמנים
+                    </h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- התאמה אישית -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-sliders-h text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התאמה אישית למערכת</h3>
+                        </div>
+                        <p>כי כל קבלן אוהב שהמערכת מדברת בשפה שלו</p>
+                    </div>
+
+                    <!-- כניסה/יציאה מהבית -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-home text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התראות כניסה ויציאה מהבית</h3>
+                        </div>
+                        
+                        <div class="whatsapp-group mb-4">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">קבוצת מנהלים - התראות חריגים</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">⚠️ התראת כניסה הביתה בשעות העבודה</p>
+                                    <p class="text-sm mt-1">עובד: ישראל ישראלי</p>
+                                    <p class="text-sm">שעת כניסה: 11:32</p>
+                                    <p class="text-sm">משך שהייה: 58 דקות</p>
+                                </div>
+                            </div>
+                            <div class="whatsapp-message" style="background-color: #e2f7cb;">
+                                <div class="text-gray-800">
+                                    <p class="font-bold">✅ תגובת מנהל:</p>
+                                    <p class="text-sm mt-1">"טיפלתי בנושא, איזה מזל פעם הוא היה נכנס הבייתה באמצע היום לשעה שלמה."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- כניסה/יציאה מאתרי עבודה -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-hard-hat text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התראות כניסה ויציאה מאתרי עבודה</h3>
+                        </div>
+                        
+                        <div class="whatsapp-group">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">קבוצת מנהלים - מעקב אתרים</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">🏗️ דיווח כניסה לאתר עבודה</p>
+                                    <p class="text-sm mt-1">אתר: מגדלי אקירוב ת"א</p>
+                                    <p class="text-sm">עובד: ישראל ישראלי</p>
+                                    <p class="text-sm">שעת כניסה: 07:15</p>
+                                    <p class="text-sm text-green-600">✅ הגיע בזמן</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- שכבות משתמשים -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-layer-group text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">שכבות משתמשים</h3>
+                        </div>
+                        <p>כל מנהל רואה רק את העובדים תחתיו</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- בטיחות וחיסכון -->
+            <section class="mb-12">
+                <div class="bg-gradient-to-r from-[#00B8D4]/10 to-transparent p-4 rounded-lg mb-4">
+                    <h2 class="text-2xl font-bold text-[#00B8D4]">
+                        <i class="fas fa-shield-alt mr-2"></i>
+                        בטיחות וחיסכון
+                    </h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- אירועים חריגים -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-exclamation-triangle text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התראות WhatsApp על אירועים חריגים</h3>
+                        </div>
+                        <div class="whatsapp-group">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">קבוצת מנהלים - אירועים חריגים</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">⚠️ התראת אירוע חריג</p>
+                                    <p class="text-sm mt-1">סוג אירוע: חריגה מאזור מורשה</p>
+                                    <p class="text-sm">רכב: 12-345-67</p>
+                                    <p class="text-sm">נהג: ישראל ישראלי</p>
+                                    <p class="text-sm">זמן: 14:23</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- נהיגה אגרסיבית -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-tachometer-alt text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התראות נהיגה אגרסיבית</h3>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full mr-2">
+                                נשלח ישירות לנהג
+                            </span>
+                        </div>
+                        
+                        <div class="whatsapp-group">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">התראה אישית לנהג</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">🚨 מהירות מופרזת 🚨</p>
+                                    <p class="text-sm mt-1">מהירות שנמדדה: 142 קמ"ש</p>
+                                    <p class="text-sm">מהירות מותרת: 90 קמ"ש</p>
+                                    <p class="text-sm font-bold text-red-600">חריגה: 52 קמ"ש ❌</p>
+                                    <p class="text-sm mt-2">⚠️ סכנה ממשית ל:</p>
+                                    <p class="text-sm">- זימון לבית משפט</p>
+                                    <p class="text-sm">- פסילת רישיון</p>
+                                    <p class="text-sm">- החרמת הרכב</p>
+                                    <p class="text-sm mt-2">נרשמו 2,000 נקודות עונשין בדו"ח האישי שלך</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            שליחת התראות ישירות לנהג מסייעת במניעת התנהגות מסוכנת עתידית
+                        </p>
+                    </div>
+
+                    <!-- כבישי אגרה -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-road text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התראות כבישי אגרה</h3>
+                        </div>
+                        
+                        <div class="whatsapp-group">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">קבוצת מנהלים - כבישי אגרה</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">⚠️ כניסה לכביש אגרה</p>
+                                    <p class="text-sm mt-1">כביש: כביש 6</p>
+                                    <p class="text-sm">רכב: 12-345-67</p>
+                                    <p class="text-sm">נהג: ישראל ישראלי</p>
+                                    <p class="text-sm">זמן: 20:45</p>
+                                    <p class="text-sm text-red-600 font-bold">❌ מחוץ לשעות העבודה</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- ניווט חכם -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marked-alt text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">ניווט חכם</h3>
+                        </div>
+                        <p>נקודה דחופה? בלת"מ? הזן כתובת במערכת – נחסוך לך את הטלפונים המיותרים לעובדים וגם נתחשב בפקקי התנועה על מנת לחסוך לך זמן מיותר</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ניהול צי הרכב ובקרה -->
+            <section class="mb-12">
+                <div class="bg-gradient-to-r from-[#00B8D4]/10 to-transparent p-4 rounded-lg mb-4">
+                    <h2 class="text-2xl font-bold text-[#00B8D4]">
+                        <i class="fas fa-car mr-2"></i>
+                        ניהול צי הרכב ובקרה
+                    </h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- תחזוקה -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-tools text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התראות תחזוקה אוטומטיות</h3>
+                        </div>
+                        
+                        <div class="whatsapp-group">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">התראות תחזוקה</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">🔧 תזכורת תחזוקה לרכב</p>
+                                    <p class="text-sm mt-1">מספר רכב: 12-345-67</p>
+                                    <p class="text-sm">טיפול קרוב: בעוד 235 ק"מ</p>
+                                    <p class="text-sm">תוקף טסט: 14 ימים</p>
+                                    <p class="text-sm">ביטוח חובה: 45 ימים</p>
+                                    <p class="text-sm mt-2">*** התראה זו תישלח שוב בעוד שבוע</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ליסינג -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-car-side text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">מעקב רכבי ליסינג</h3>
+                        </div>
+                        
+                        <div class="whatsapp-group">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">התראות ליסינג</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">⚠️ חריגת קילומטראז' בליסינג</p>
+                                    <p class="text-sm mt-1">רכב מספר: 12-345-67</p>
+                                    <p class="text-sm text-red-600">חריגה: 3,000 ק"מ החודש</p>
+                                    <p class="text-sm mt-2">שים לב: תשלום נוסף החל לחברת הליסינג</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- דוחות -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-file-alt text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">דוחות מותאמים אישית</h3>
+                        </div>
+                        
+                        <div class="whatsapp-group">
+                            <div class="flex items-center mb-2">
+                                <i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                <span class="font-bold text-gray-700 dark:text-gray-300">התראות דוחות</span>
+                            </div>
+                            <div class="whatsapp-message">
+                                <div class="text-gray-800 dark:text-gray-200">
+                                    <p class="font-bold">📊 הדוח השבועי שלך מוכן!</p>
+                                    <p class="text-sm mt-1">הדוח נשלח לכתובת המייל שלך</p>
+                                    <p class="text-sm">תאריכים: 01/12-07/12</p>
+                                    <p class="text-sm mt-2">לצפייה בדוח היכנס למייל או למערכת</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- אינטגרציה -->
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-plug text-[#00B8D4] text-2xl mr-4"></i>
+                            <h3 class="text-xl font-semibold">התממשקות למערכות ERP/SAP</h3>
+                        </div>
+                        <p>סנכרון אוטומטי של נתוני נסיעות, קילומטראז', שעות עבודה ודוחות תפעוליים - ישירות למערכות הארגוניות שלכם</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom CTA -->
+            <div class="card text-center">
+                <h2 class="text-2xl font-bold mb-4">מוכנים להתחיל?</h2>
+                <p class="mb-6">צרו קשר עכשיו לקבלת הצעת מחיר מותאמת לצרכים שלכם</p>
+                <a href="contact.html" class="inline-block bg-[#00B8D4] text-white px-8 py-3 rounded-lg hover:bg-[#0091a8] transition-colors">
+                    <i class="fas fa-handshake mr-2"></i>
+                    נתראה בפגישה
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+</body>
+</html>

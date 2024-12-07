@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רקע כללי - Tracer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-all">
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg">
+        <i class="fas fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar">
+        <!-- Logo Container -->
+        <div class="logo-container">
+            <img src="https://tracer.co.il/wp-content/uploads/elementor/thumbs/Logo-H-p8d906f0bmrgobnn9uwquzibery89mtbvr1plpc910.png" alt="Tracer Logo">
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="p-4">
+            <div class="space-y-2">
+                <a href="general.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>רקע כללי</span>
+                </a>
+                <a href="devices.html" class="nav-link">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>מכשירים פופולריים</span>
+                </a>
+                <a href="bundle.html" class="nav-link">
+                    <i class="fas fa-box-open"></i>
+                    <span>באנדל קבלנים</span>
+                </a>
+                <a href="reports.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>מערכת דוחות</span>
+                </a>
+                <a href="how-it-works.html" class="nav-link">
+                    <i class="fas fa-cogs"></i>
+                    <span>איך זה עובד</span>
+                </a>
+                <a href="contact.html" class="nav-link">
+                    <i class="fas fa-handshake"></i>
+                    <span>נתראה בפגישה</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Dark Mode Toggle -->
+        <div class="absolute bottom-0 right-0 w-full px-4 pb-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center justify-between py-4">
+                <span class="text-sm text-gray-600 dark:text-gray-400">מצב כהה</span>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header Section -->
+            <div class="card p-8 bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900 mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                    רקע כללי: ניהול ציי רכבים בישראל בשנת 2025
+                </h1>
+                <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                    ניהול ציי רכבים, במיוחד כשמדובר בעובדי שטח, הוא אתגר מתמשך לכל עסק. בשנת 2025, אמנם רוב החברות במשק מחזיקות במערכת לניהול ציי רכבים, אך נשאלת השאלה הקריטית: 
+                    <span class="font-bold text-[#00B8D4]">האם הן באמת מפיקות ממנה את המקסימום?</span>
+                </p>
+            </div>
+
+            <!-- Current Reality Section -->
+            <div class="card bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg mb-8">
+                <h2 class="text-2xl font-bold mb-6">המציאות בשטח</h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">
+                    רוב המערכות הקיימות כיום מתמקדות במניעת גניבות, אך הן אינן מספקות מענה מלא לבעיות היום-יום של ניהול עובדי שטח.
+                </p>
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                        <i class="fas fa-question-circle text-[#00B8D4] mt-1"></i>
+                        <p class="text-gray-700 dark:text-gray-300">האם הנתונים שמופקים מדויקים ומהימנים?</p>
+                    </div>
+                    <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                        <i class="fas fa-question-circle text-[#00B8D4] mt-1"></i>
+                        <p class="text-gray-700 dark:text-gray-300">האם ניתן לדעת במדויק כמה עולה עובד השטח - בזמן ובמחוץ לשעות העבודה?</p>
+                    </div>
+                    <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                        <i class="fas fa-question-circle text-[#00B8D4] mt-1"></i>
+                        <p class="text-gray-700 dark:text-gray-300">האם קיימת אינדיקציה אמיתית לעלויות תחזוקת רכבים, תרבות נהיגה, צריכת דלק, ושעות עבודה בפועל?</p>
+                    </div>
+                    <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                        <i class="fas fa-question-circle text-[#00B8D4] mt-1"></i>
+                        <p class="text-gray-700 dark:text-gray-300">ובעיקר - האם המערכות באמת מסייעות לשפר את ביצועי העובדים הבינוניים ולזהות מדוע המצטיינים טובים כל כך?</p>
+                    </div>
+                    <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                        <i class="fas fa-question-circle text-[#00B8D4] mt-1"></i>
+                        <p class="text-gray-700 dark:text-gray-300">ובתכלס, רוב המערכות לא באמת חוסכות זמן למשתמשים שלהן. הן כל כך מסורבלות ומורכבות עד שרוב בעלי העסקים משתמשים בהן רק במקרים נקודתיים, כשכבר ידוע על תקלה או אירוע חריג, במקום לנהל באמצעותן את העסק ביום-יום.</p>
+                    </div>
+                </div>
+                <p class="text-xl font-bold text-[#00B8D4]">התשובה לרוב היא לא.</p>
+            </div>
+
+            <!-- Vision Section -->
+            <div class="card bg-gradient-to-br from-[#00B8D4]/5 to-transparent dark:from-[#00B8D4]/10 p-8 rounded-xl shadow-lg mb-8">
+                <h2 class="text-2xl font-bold mb-4">החזון של טרייסר טכנולוגיות</h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">
+                    <span class="font-bold">טרייסר</span> הוקמה מתוך הבנה שהשוק זקוק לשינוי משמעותי. אנחנו כאן כדי להפוך את ניהול עובדי השטח ממעקב יבש לכלי עבודה פרקטי, יעיל, ומדויק.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-lg">
+                    המערכת שלנו פועלת על פי עקרון אחד פשוט: 
+                    <span class="font-bold">לחבר בין מה שקורה בשטח לבין האדם הרלוונטי שמנהל אותו – בין אם מהמשרד או מהשטח עצמו.</span>
+                </p>
+    <p class="text-gray-700 dark:text-gray-300 text-lg mt-4">
+        ובכך לפנות לך זמן לדברים החשובים באמת בעסק. 
+        אנחנו בונים עבורך מעטפת אוטומטית של שליטה ובקרה על עובדי השטח שלך – 
+        שתדע לחסוך לך דלק, לשפר את היעילות, ובעיקר לפנות לך זמן להתמקד בדברים החשובים באמת.
+    </p>
+</div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-6">מה אנחנו מציעים?</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all">
+                        <div class="flex items-center space-x-4 rtl:space-x-reverse mb-4">
+                            <div class="p-3 bg-[#00B8D4] bg-opacity-10 rounded-lg">
+                                <i class="fas fa-crosshairs text-[#00B8D4] text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">דיוק של 1-8 מטרים</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">נתונים אמינים ברמת השטח.</p>
+                    </div>
+
+                    <div class="card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all">
+                        <div class="flex items-center space-x-4 rtl:space-x-reverse mb-4">
+                            <div class="p-3 bg-[#00B8D4] bg-opacity-10 rounded-lg">
+                                <i class="fas fa-clock text-[#00B8D4] text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">זמן דגימה בזמן אמת</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">כך שאתה תמיד עם האצבע על הדופק.</p>
+                    </div>
+
+                    <div class="card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all">
+                        <div class="flex items-center space-x-4 rtl:space-x-reverse mb-4">
+                            <div class="p-3 bg-[#00B8D4] bg-opacity-10 rounded-lg">
+                                <i class="fas fa-chart-bar text-[#00B8D4] text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">מערכת דוחות חכמה</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">שמביאה לך תובנות אמיתיות וערך יומיומי.</p>
+                    </div>
+
+                    <div class="card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all">
+                        <div class="flex items-center space-x-4 rtl:space-x-reverse mb-4">
+                            <div class="p-3 bg-[#00B8D4] bg-opacity-10 rounded-lg">
+                                <i class="fas fa-bell text-[#00B8D4] text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">התראות פרואקטיביות</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">על כל אירוע חריג, ישירות למי שצריך לדעת.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Message -->
+            <div class="card bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg text-center mb-8">
+                <p class="text-xl mb-6">
+                    במקום עוד מערכת שעובדת בשביל עצמה, 
+                    <span class="font-bold text-[#00B8D4]">טרייסר היא אקוסיסטם שלם שנבנה לעבוד בשבילך.</span>
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    בעמוד הבא, תבין איך בדיוק זה עובד, ואיך גם העסק שלך יכול לצמוח עם טרייסר.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+</body>
+</html>
