@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מערכת דוחות - Tracer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .image-zoom {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .image-zoom:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .challenges-box {
+            background: rgba(255, 59, 48, 0.05);
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .dark .challenges-box {
+            background: rgba(255, 59, 48, 0.1);
+        }
+
+        .highlight-danger {
+            color: #ff3b30;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-all">
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg">
+        <i class="fas fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar">
+        <!-- Logo Container -->
+        <div class="logo-container">
+            <img src="https://tracer.co.il/wp-content/uploads/elementor/thumbs/Logo-H-p8d906f0bmrgobnn9uwquzibery89mtbvr1plpc910.png" alt="Tracer Logo">
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="p-4">
+            <div class="space-y-2">
+                <a href="general.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>רקע כללי</span>
+                </a>
+                <a href="devices.html" class="nav-link">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>מכשירים פופולריים</span>
+                </a>
+                <a href="bundle.html" class="nav-link">
+                    <i class="fas fa-box-open"></i>
+                    <span>באנדל קבלנים</span>
+                </a>
+                <a href="reports.html" class="nav-link active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>מערכת דוחות</span>
+                </a>
+                <a href="how-it-works.html" class="nav-link">
+                    <i class="fas fa-cogs"></i>
+                    <span>איך זה עובד</span>
+                </a>
+                <a href="contact.html" class="nav-link">
+                    <i class="fas fa-handshake"></i>
+                    <span>נתראה בפגישה</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Dark Mode Toggle -->
+        <div class="absolute bottom-0 right-0 w-full px-4 pb-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center justify-between py-4">
+                <span class="text-sm text-gray-600 dark:text-gray-400">מצב כהה</span>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header -->
+            <div class="card p-8 mb-8 bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900">
+                <h1 class="text-4xl font-bold mb-4">
+                    טרייסר – הופכים דוחות לתוצאות
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300">מערכת דוחות חכמה שעובדת בשבילך</p>
+            </div>
+
+            <!-- Time Saving Section -->
+            <div class="card p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6">זוכר שדיברנו על חיסכון בזמן?</h2>
+                <p class="text-lg mb-6">
+                    בוא נדבר תכלס – תשכח מלהיות מאסטר באקסל, להתקשר לשירות לקוחות כי הדוח מכיל "יותר מדי מידע" ולא ניתן להפיק אותו, או לנסות לתפעל את המערכת כאילו אתה מפתח מקצועי.
+                </p>
+                <p class="text-lg text-[#00B8D4] font-bold mb-8">
+                    והכי גרוע? אחרי כל זה, אתה לא באמת מוצא את הנתונים שבאמת חשובים לך.
+                </p>
+
+                <!-- Example Images -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <img src="https://i.ibb.co/9qByMFZ/image.png" 
+                             alt="מגבלת שורות בדוח" 
+                             class="image-zoom w-full h-auto"
+                             onclick="openImageModal(this.src)">
+                    </div>
+                    <div>
+                        <img src="https://i.ibb.co/DbSmR3K/image.png" 
+                             alt="מסלול לא מדויק" 
+                             class="image-zoom w-full h-auto"
+                             onclick="openImageModal(this.src)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Challenges Section -->
+            <div class="challenges-box mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+                    בינינו, מה קורה כשכבר יש לך דוח ביד? יש שלושה תרחישים:
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white/50 dark:bg-gray-800/50 p-6 rounded-xl">
+                        <i class="fas fa-crown text-red-500 text-2xl mb-4"></i>
+                        <p class="text-gray-800 dark:text-gray-200">
+                            אתה גאון אקסל – קוסם של נוסחאות ופילטרים, עד כדי כך שאתה שוקל לפתוח קורס.
+                        </p>
+                    </div>
+                    <div class="bg-white/50 dark:bg-gray-800/50 p-6 rounded-xl">
+                        <i class="fas fa-hourglass-half text-red-500 text-2xl mb-4"></i>
+                        <p class="text-gray-800 dark:text-gray-200">
+                            אתה מבזבז שעות על שעות – מתאמץ להבין מה קורה במקום לנהל את העסק שלך.
+                        </p>
+                    </div>
+                    <div class="bg-white/50 dark:bg-gray-800/50 p-6 rounded-xl">
+                        <i class="fas fa-ban text-red-500 text-2xl mb-4"></i>
+                        <p class="text-gray-800 dark:text-gray-200">
+                            אתה פשוט מתייאש – והנתונים? הם נשארים יתומים, ללא שימוש.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cost Emphasis -->
+            <div class="card p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">
+                    יש לך 20 רכבים בצי? אתה משלם בסביבות 60,000 ש"ח בחודש על דלק!
+                </h2>
+                <p class="text-lg mb-4">זה כנראה ההוצאה הכי גבוהה שלך אחרי משכורות.</p>
+                <p class="text-xl font-bold text-[#00B8D4]">
+                    בשנת 2025, עם כל הטכנולוגיה הזמינה, זה פשוט לא הגיוני.
+                </p>
+            </div>
+
+            <!-- Our Solution -->
+            <div class="card p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6">איך אנחנו עושים את זה אחרת?</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-[#00B8D4]/5 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-4">דוחות חכמים אוטומטיים</h3>
+                        <p>נשלחים ישירות למייל שלך – יומי, שבועי או חודשי, תלוי בצרכים שלך.</p>
+                    </div>
+                    <div class="bg-[#00B8D4]/5 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-4">התאמה אישית מלאה</h3>
+                        <p>אנחנו מתאימים את הדוחות כך שיציגו בדיוק את הנתונים שחשובים לעסק שלך.</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4">מה תוכל לראות בדוחות שלנו?</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                זמני עבודה של העובדים
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                אתרי העבודה
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                תדלוקים וצריכת דלק
+                            </li>
+                        </ul>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                שעון נוכחות אוטומטי
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                כניסות ויציאות מהבית
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                עלויות העובדים
+                            </li>
+                        </ul>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                מעקב כבישי אגרה
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-[#00B8D4] mr-2"></i>
+                                דוחות מותאמים אישית
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Example Card View -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold mb-4">עד שממש נגיע איתך למצב הזה</h3>
+                    <img src="https://i.ibb.co/z2J73sV/image.png" 
+                         alt="כרטיס רכב מפורט"
+                         class="image-zoom w-full h-auto"
+                         onclick="openImageModal(this.src)">
+                </div>
+            </div>
+
+<!-- Enterprise Section -->
+            <div class="card p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">ומה עם עסקים עם מעל 30 רכבים?</h2>
+                <p class="text-lg mb-4">
+                    אנחנו יודעים שחשוב לך שהכול יעבוד במקום אחד, ולכן אנחנו מאפשרים להזרים את כל הנתונים ישירות למערכת ה-ERP שלך.
+                </p>
+                <p class="text-lg">בלי מאמץ, בלי בלגן, הכול זמין ונגיש.</p>
+            </div>
+
+            <!-- Final CTA -->
+            <div class="card p-8 text-center bg-gradient-to-br from-[#00B8D4]/10 to-transparent">
+                <h2 class="text-2xl font-bold mb-4">תן לנו לדאוג לדוחות, ואתה תוכל להתמקד בניהול העסק שלך כמו שצריך.</h2>
+                <p class="text-xl font-bold text-[#00B8D4]">
+                    טרייסר – הופכים דוחות לתוצאות. דוחות שעובדים בשבילך – ולא להפך.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <img src="" alt="תמונה מוגדלת">
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        function openImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = modal.querySelector('img');
+            modalImg.src = src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+</html>
