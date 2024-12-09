@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>איך זה עובד - Tracer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .whatsapp-alert {
+            background-color: #DCF8C6;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .dark .whatsapp-alert {
+            background-color: #025C4C;
+        }
+
+        .email-alert {
+            background-color: #F8F9FA;
+            border: 1px solid #E9ECEF;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .dark .email-alert {
+            background-color: #1F2937;
+            border-color: #374151;
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 184, 212, 0.1);
+        }
+
+        .image-zoom {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .image-zoom:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .section-title {
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #00B8D4;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-all">
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg">
+        <i class="fas fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar">
+        <!-- Logo Container -->
+        <div class="logo-container">
+            <img src="https://tracer.co.il/wp-content/uploads/elementor/thumbs/Logo-H-p8d906f0bmrgobnn9uwquzibery89mtbvr1plpc910.png" alt="Tracer Logo">
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="p-4">
+            <div class="space-y-2">
+                <a href="general.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>רקע כללי</span>
+                </a>
+                <a href="devices.html" class="nav-link">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>מכשירים פופולריים</span>
+                </a>
+                <a href="bundle.html" class="nav-link">
+                    <i class="fas fa-box-open"></i>
+                    <span>באנדל קבלנים</span>
+                </a>
+                <a href="reports.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>מערכת דוחות</span>
+                </a>
+                <a href="how-it-works.html" class="nav-link active">
+                    <i class="fas fa-cogs"></i>
+                    <span>איך זה עובד</span>
+                </a>
+                <a href="contact.html" class="nav-link">
+                    <i class="fas fa-handshake"></i>
+                    <span>נתראה בפגישה</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Dark Mode Toggle -->
+        <div class="absolute bottom-0 right-0 w-full px-4 pb-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center justify-between py-4">
+                <span class="text-sm text-gray-600 dark:text-gray-400">מצב כהה</span>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header -->
+            <div class="card bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900 p-8 mb-8">
+                <h1 class="text-4xl font-bold mb-4">איך זה עובד?</h1>
+                <h2 class="text-2xl font-bold text-[#00B8D4]">אפליקציה פרקטית ונוחה לשימוש</h2>
+            </div>
+
+            <!-- App Features -->
+            <div class="card p-8 mb-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">אפליקציה ידידותית לשימוש בטלפון</h3>
+                        <p class="mb-4">המספקת שליטה ובקרה מלאה</p>
+                        <div class="grid grid-cols-3 gap-4">
+                            <img src="https://i.ibb.co/FYw4DPw/image.png" 
+                                 alt="אפליקציית טרייסר" 
+                                 class="image-zoom w-full"
+                                 onclick="openImageModal(this.src)">
+                            <img src="https://i.ibb.co/JngcGcj/image.png" 
+                                 alt="אפליקציית טרייסר" 
+                                 class="image-zoom w-full"
+                                 onclick="openImageModal(this.src)">
+                            <img src="https://i.ibb.co/gDFz53V/image.png" 
+                                 alt="אפליקציית טרייסר" 
+                                 class="image-zoom w-full"
+                                 onclick="openImageModal(this.src)">
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">ממשק WEB מתקדם</h3>
+                        <p class="mb-4">מציג את כל הנתונים בזמן אמת, בצורה ברורה ופשוטה</p>
+                        <img src="https://tracer.co.il/wp-content/uploads/2022/12/Desktop-1-768x576.jpg"
+                             alt="ממשק ווב של טרייסר"
+                             class="image-zoom w-full rounded-xl"
+                             onclick="openImageModal(this.src)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Small Business Section -->
+            <div class="card p-8 mb-8">
+                <h2 class="section-title text-3xl font-bold mb-8 pr-6">עסק קטן - עד 30 רכבים</h2>
+                
+                <!-- בעל העסק -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-user-tie text-[#00B8D4] mr-2"></i>
+                        בעל העסק
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                            <h4 class="font-bold mb-3">שליטה מלאה ושקט נפשי</h4>
+                            <p class="mb-4">יודע שיש לו בקרה על העסק, מקבל התראות על אירועים חריגים שמונעות הפסדים כספיים.</p>
+                            
+                            <!-- Example Alerts -->
+                            <div class="space-y-4">
+                                <!-- Early Exit Alert -->
+                                <div class="whatsapp-alert">
+                                    <div class="flex items-start">
+                                        <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                        <div>
+                                            <p class="font-bold">⚠️ התראת יציאה מוקדמת מאתר</p>
+                                            <p class="text-sm mt-1">
+                                                עובד: ישראל ישראלי
+                                                <br>אתר: מגדלי אקירוב ת"א
+                                                <br>שעת יציאה: 15:30
+                                                <br>זמן מתוכנן: 17:00
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Leasing Alert -->
+                                <div class="whatsapp-alert">
+                                    <div class="flex items-start">
+                                        <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                        <div>
+                                            <p class="font-bold">⚠️ חריגת קילומטראז' בליסינג</p>
+                                            <p class="text-sm mt-1">
+                                                רכב: 12-345-67
+                                                <br>חריגה: 3,247 ק"מ מעל המכסה החודשית
+                                                <br>עלות צפויה: 1,623 ₪
+                                                <br>⚠️ יש לצמצם נסיעות לא חיוניות
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Non-Work Hours Alert -->
+                                <div class="whatsapp-alert">
+                                    <div class="flex items-start">
+                                        <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                        <div>
+                                            <p class="font-bold">⚠️ נסיעה חריגה מחוץ לשעות העבודה</p>
+                                            <p class="text-sm mt-1">
+                                                רכב: 12-345-67
+                                                <br>נסיעה: 2,734 ק"מ החודש לא בזמן עבודה
+                                                <br>עלות דלק מוערכת: 2,460 ₪
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- More sections continue... -->
+                       
+                       <!-- Late Arrival Alert -->
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <div class="whatsapp-alert">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">⚠️ איחור להגעה לאתר</p>
+                                       <p class="text-sm mt-1">
+                                           עובד: ישראל ישראלי
+                                           <br>יציאה מהבית: 08:45
+                                           <br>הגעה לאתר: 09:30
+                                           <br>זמן מתוכנן: 08:00
+                                           <br>❌ איחור של 90 דקות
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- מנהל העובדים בשטח -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-users text-[#00B8D4] mr-2"></i>
+                       מנהל העובדים בשטח
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <h4 class="font-bold mb-3">ניהול יעיל וממוקד</h4>
+                           <p class="mb-4">פותח את האפליקציה ורואה את המצב בשטח בזמן אמת.</p>
+                           
+                           <!-- Site Entry Alert -->
+                           <div class="whatsapp-alert">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">✅ כניסה לאתר עבודה</p>
+                                       <p class="text-sm mt-1">
+                                           אתר: מגדלי אקירוב ת"א
+                                           <br>עובד: ישראל ישראלי
+                                           <br>שעת כניסה: 07:58
+                                           <br>✅ הגיע בזמן
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- הנהג עצמו -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-user text-[#00B8D4] mr-2"></i>
+                       הנהג עצמו
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <!-- Speed Alert -->
+                           <div class="whatsapp-alert">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">🚨 מהירות מופרזת 🚨</p>
+                                       <p class="text-sm mt-1">
+                                           נמדדה מהירות של 140 קמ"ש
+                                           <br>מהירות מותרת: 90 קמ"ש
+                                           <br>❌ חריגה: 50 קמ"ש
+                                           <br>⚠️ סכנת נקודות וקנסות
+                                           <br>*** נרשמו 2,000 נקודות עונשין
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- כוח אדם ומשכורות -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-user-clock text-[#00B8D4] mr-2"></i>
+                       כוח אדם ומשכורות
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <!-- Attendance Report Email -->
+                           <div class="email-alert">
+                               <div class="flex items-start">
+                                   <i class="fas fa-envelope text-blue-500 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">📊 דוח נוכחות שבועי</p>
+                                       <p class="text-sm mt-1">
+                                           תאריך: 1-7/12/2024
+                                           <br>מצורף דוח הכולל:
+                                           <br>- שעות עבודה
+                                           <br>- יציאות וכניסות מאתרים
+                                           <br>- שעות נוספות
+                                           <br>- חריגות זמנים
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- תחזוקת רכבים -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-tools text-[#00B8D4] mr-2"></i>
+                       תחזוקת רכבים
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <!-- Maintenance Alert -->
+                           <div class="whatsapp-alert">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">🔧 תזכורת תחזוקה</p>
+                                       <p class="text-sm mt-1">
+                                           רכב: 12-345-67
+                                           <br>טיפול הבא: בעוד 235 ק"מ
+                                           <br>טסט: בעוד 14 ימים
+                                           <br>ביטוח חובה: בעוד 45 ימים
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+<!-- Large Business Section -->
+           <div class="card p-8 mb-8">
+               <h2 class="section-title text-3xl font-bold mb-8 pr-6">עסק גדול - מעל 30 רכבים</h2>
+
+               <!-- בעל העסק -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-user-tie text-[#00B8D4] mr-2"></i>
+                       בעל העסק
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <h4 class="font-bold mb-3">בקרה ושליטה מתקדמת</h4>
+                           <!-- Daily Report Email -->
+                           <div class="email-alert">
+                               <div class="flex items-start">
+                                   <i class="fas fa-envelope text-blue-500 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">📊 דוח יומי - סיכום פעילות</p>
+                                       <p class="text-sm mt-1">
+                                           תאריך: 07/12/2024
+                                           <br>סה"כ רכבים פעילים: 45
+                                           <br>חריגות היום:
+                                           <br>- 3 איחורים לאתרי עבודה
+                                           <br>- 2 חריגות קילומטראז'
+                                           <br>- 1 חריגת מהירות
+                                           <br>צריכת דלק: 1,250 ליטר
+                                           <br>עלות מוערכת: 8,750 ₪
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- סמנכ"ל כספים -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-calculator text-[#00B8D4] mr-2"></i>
+                       סמנכ"ל כספים
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <h4 class="font-bold mb-3">חיסכון כספי חכם</h4>
+                           <!-- Financial Report Email -->
+                           <div class="email-alert">
+                               <div class="flex items-start">
+                                   <i class="fas fa-envelope text-blue-500 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">💰 דוח עלויות חודשי</p>
+                                       <p class="text-sm mt-1">
+                                           חודש: נובמבר 2024
+                                           <br>עלויות:
+                                           <br>- דלק: 185,000 ₪
+                                           <br>- חריגות ליסינג: 12,500 ₪
+                                           <br>- כבישי אגרה: 8,750 ₪
+                                           <br>- שעות נוספות: 45,000 ₪
+                                           <br>חיסכון פוטנציאלי: 35,000 ₪
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+
+                           <!-- Excess Cost Alert -->
+                           <div class="whatsapp-alert mt-4">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">⚠️ חריגת עלויות</p>
+                                       <p class="text-sm mt-1">
+                                           נמצאו 5 רכבים עם חריגות משמעותיות:
+                                           <br>- 3 רכבים חרגו ממכסת הק"מ
+                                           <br>- 2 רכבים עם צריכת דלק חריגה
+                                           <br>עלות חודשית נוספת: 8,500 ₪
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- סמנכ"ל תפעול -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-tasks text-[#00B8D4] mr-2"></i>
+                       סמנכ"ל תפעול
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <h4 class="font-bold mb-3">מעקב בזמן אמת</h4>
+<!-- Operations Alert -->
+                           <div class="whatsapp-alert">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">📍 סטטוס עבודה נוכחי</p>
+                                       <p class="text-sm mt-1">
+                                           כרגע באתרים:
+                                           <br>- 15 רכבים באתרי עבודה
+                                           <br>- 5 רכבים בנסיעה לאתרים
+                                           <br>- 3 רכבים בהפסקת צהריים
+                                           <br>⚠️ 2 רכבים באיחור לאתר
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- קצין רכב -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-car text-[#00B8D4] mr-2"></i>
+                       קצין רכב
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <!-- Vehicle Maintenance Email -->
+                           <div class="email-alert">
+                               <div class="flex items-start">
+                                   <i class="fas fa-envelope text-blue-500 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">🔧 דוח תחזוקת רכבים שבועי</p>
+                                       <p class="text-sm mt-1">
+                                           תאריך: 07/12/2024
+                                           <br>דרוש טיפול בשבוע הקרוב:
+                                           <br>- 3 רכבים לטיפול 30,000
+                                           <br>- 2 רכבים לחידוש טסט
+                                           <br>- 1 רכב לחידוש ביטוח
+                                           <br>קילומטראז' עדכני לכל הרכבים מצורף
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+
+                           <!-- Maintenance Alert -->
+                           <div class="whatsapp-alert mt-4">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">⚠️ תזכורת דחופה - טיפול</p>
+                                       <p class="text-sm mt-1">
+                                           רכב: 12-345-67
+                                           <br>קילומטראז': 29,850
+                                           <br>⚠️ נדרש טיפול 30,000 בדחיפות
+                                           <br>טסט: בתוקף עד 01/03/25
+                                           <br>ביטוח: בתוקף עד 01/02/25
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- הנהג עצמו -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-user text-[#00B8D4] mr-2"></i>
+                       הנהג עצמו
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <!-- Speed Alert -->
+                           <div class="whatsapp-alert">
+                               <div class="flex items-start">
+                                   <i class="fab fa-whatsapp text-green-600 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">🚨 התראת בטיחות אישית</p>
+                                       <p class="text-sm mt-1">
+                                           נמדדה מהירות: 140 קמ"ש
+                                           <br>מהירות מותרת: 90 קמ"ש
+                                           <br>❌ חריגה: 50 קמ"ש
+                                           <br>⚠️ סכנת נקודות וקנסות
+                                           <br>*** נרשמו 2,000 נקודות עונשין
+                                           <br>*** צריכת דלק חריגה
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- כוח אדם ומשכורות -->
+               <div class="mb-8">
+                   <h3 class="text-2xl font-bold mb-4">
+                       <i class="fas fa-user-clock text-[#00B8D4] mr-2"></i>
+                       כוח אדם ומשכורות
+                   </h3>
+                   <div class="grid md:grid-cols-2 gap-6">
+                       <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                           <!-- HR Report Email -->
+                           <div class="email-alert">
+                               <div class="flex items-start">
+                                   <i class="fas fa-envelope text-blue-500 text-xl ml-2"></i>
+                                   <div>
+                                       <p class="font-bold">👥 דוח נוכחות אוטומטי</p>
+                                       <p class="text-sm mt-1">
+                                           חודש: נובמבר 2024
+                                           <br>מצורף דוח מפורט הכולל:
+                                           <br>- כניסות ויציאות מאתרים
+                                           <br>- שעות נוספות
+                                           <br>- חריגות זמנים
+                                           <br>- סיכום שעות לכל עובד
+                                           <br>הדוח מוכן להעברה למשכורות
+                                       </p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Image Modal -->
+           <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+               <img src="" alt="תמונה מוגדלת">
+           </div>
+       </div>
+   </main>
+
+   <script src="../script.js"></script>
+   <script>
+       function openImageModal(src) {
+           const modal = document.getElementById('imageModal');
+           const modalImg = modal.querySelector('img');
+           modalImg.src = src;
+           modal.style.display = 'flex';
+           document.body.style.overflow = 'hidden';
+       }
+
+       function closeImageModal() {
+           document.getElementById('imageModal').style.display = 'none';
+           document.body.style.overflow = 'auto';
+       }
+
+       document.addEventListener('keydown', function(e) {
+           if (e.key === 'Escape') {
+               closeImageModal();
+           }
+       });
+   </script>
+</body>
+</html>
